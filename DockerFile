@@ -1,9 +1,6 @@
 FROM kalilinux/kali-linux-docker
 
 ENV container docker
-ENV LC_ALL=en_US.UTF-8
-ENV LANGUAGE=en_US.UTF-8
-ENV LANG=en_US.UTF-8
 
 RUN apt-get update
 RUN apt-get install metasploit-framework -y
