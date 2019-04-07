@@ -9,20 +9,7 @@ RUN mkdir /usr/nmap_logstash
 
 RUN curl https://raw.githubusercontent.com/nateshull/nmap_xml_to_json/master/nmap_xml_to_json.py > /usr/nmap_logstash/nmap_xml_to_json.py
 
-RUN echo $'#!/bin/bash \n\
-echo "running script"\n\
-if [ "$DEBUG" == "true" ] \n\
-then \n\
-	echo "running nmap $NMAP_ARG -oX - | python3 /usr/nmap_logstash/nmap_xml_to_json.py | curl -H "x-nmap-target: $HEADER_INFO" http://$LOGSTASH_SERVER:$LOGSTASH_PORT --data-binary @- " \n\
-fi \n\
-if [ "$LOGSTASH_USER" = "" ] \n\
-then \n\
-	nmap $NMAP_ARG -oX - | python3 /usr/nmap_logstash/nmap_xml_to_json.py | curl -H "x-nmap-target: $SCAN_DESC" $LOGSTASH_SERVER --data-binary @- \n\
-else \n\
-	nmap $NMAP_ARG -oX - | python3 /usr/nmap_logstash/nmap_xml_to_json.py | curl -u $LOGSTASH_USER:$LOGSTASH_PASS -H "x-nmap-target: $SCAN_DESC" $LOGSTASH_SERVER --data-binary @- \n\
-fi \n\
-\n'\
-> /usr/nmap_logstash/start_script.sh
+RUN curl https://raw.githubusercontent.com/nateshull/nmap_to_logstash_docker/master/start_script.sh > /usr/nmap_logstash/start_script.sh
 
 ENV DEBUG="false"
 
