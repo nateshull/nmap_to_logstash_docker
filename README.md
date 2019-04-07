@@ -13,3 +13,6 @@ https://github.com/nateshull/nmap_xml_to_json
 
 # Example command run in machine 
 nmap -p 80,443 -T4 --script http-methods.nse 192.168.0.1-255 -oX - | python nmap_xml_to_json.py | curl -H "x-nmap-target: HttpScan2" http://logstash:5000 --data-binary @-
+
+# Build commands
+docker build -t nmaplogstash .
