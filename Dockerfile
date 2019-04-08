@@ -2,7 +2,7 @@ FROM kalilinux/kali-linux-docker
 
 ENV container docker
 
-RUN apt-get update
+RUN apt-get update -y
 RUN apt-get install metasploit-framework -y
 
 RUN mkdir /usr/nmap_logstash
