@@ -14,9 +14,9 @@ then
 		echo "************json output************"
 		cat temp.json
 		echo "************upload to logstash************"
-		cat temp.json | curl -H "x-nmap-target: $HEADER_INFO" $LOGSTASH_SERVER --data-binary @-
+		cat temp.json | curl -H "x-nmap-target: $HEADER_INFO" -H "Content-Type: application/json" $LOGSTASH_SERVER -d @-
 	else
-		nmap $NMAP_ARG -oX - | python3 /usr/nmap_logstash/nmap_xml_to_json.py | curl -H "x-nmap-target: $SCAN_DESC" $LOGSTASH_SERVER --data-binary @- 
+		nmap $NMAP_ARG -oX - | python3 /usr/nmap_logstash/nmap_xml_to_json.py | curl -H "x-nmap-target: $SCAN_DESC" -H "Content-Type: application/json" $LOGSTASH_SERVER -d @- 
 	fi 
 	
 else 
